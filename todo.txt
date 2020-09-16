@@ -1,0 +1,85 @@
+Att göra:
+
+- Pages 
+    - Login
+        - Skapa ett inloggnings formulär
+
+    - Admin home
+        - Visar all skolor
+        - Kan lägga till skolor
+        - Kan redigera skolor
+
+    - Teacher home
+        - Visar skolorna som rubriker
+        - Visar grupperna under respektive skolans
+        - Öva på namnen
+
+    - Admin school_edit
+        - Visar skolans grupper
+        - Visar skolans lärare
+        - Kan lägga till grupp
+        - Kan lägga till lärare
+        - Kan redigera grupp
+        - Kan redigera lärare
+        - Kan ta bort en grupp
+        - Kan ta bort en lärare
+
+    - Admin group_edit
+        - Visar gruppens elever
+        - Kan lägga till en elev
+        - Kan redigera en elev
+        - Kan ta bort en elev
+
+    - Teacher groups
+        - Visar gruppens elever
+
+    - Teacher practice
+        - Visar en bild på eleven
+        - Visar hur många rätt man har fått
+        - Ett fält för att göra en gissning
+        - Visa om man fick rätt eller fel
+
+- DB
+    - student
+        - id
+        - name
+        - group_id
+    
+    - group
+        - id
+        - name
+        - school
+
+    - school
+        - id
+        - name
+    
+    - user
+        - id
+        - name
+        - password_hash
+        - type
+    
+    - user_school_relation
+        - user_id
+        - school_id
+
+- Models
+    - student
+        - add student
+        - get student
+
+    - group
+        - add group
+        - get group
+
+    - school
+        - add school
+        - get school
+        - get all schools
+        - get all teachers
+
+    - user
+        - add user
+        - get user
+        - get all users
