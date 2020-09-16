@@ -83,3 +83,6 @@ Att göra:
         - add user
         - get user
         - get all users
+
+- övrigt
+    - seed

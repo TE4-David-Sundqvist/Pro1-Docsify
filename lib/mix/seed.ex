@@ -1,6 +1,8 @@
 defmodule Mix.Tasks.Seed do
   use Mix.Task
 
+  import Bcrypt
+
   @shortdoc "Resets & seeds the DB."
   def run(_) do
     Mix.Task.run "app.start"
@@ -11,20 +13,29 @@ defmodule Mix.Tasks.Seed do
 
   defp drop_tables() do
     IO.puts("Dropping tables")
-    Postgrex.query!(DB, "DROP TABLE IF EXISTS fruits", [], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB, "DROP TABLE IF EXISTS users", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "DROP TABLE IF EXISTS schools", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "DROP TABLE IF EXISTS teachers", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "DROP TABLE IF EXISTS groups", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "DROP TABLE IF EXISTS students", [], pool: DBConnection.ConnectionPool)
   end
 
   defp create_tables() do
     IO.puts("Creating tables")
-    Postgrex.query!(DB, "Create TABLE fruits (id SERIAL, name VARCHAR(255) NOT NULL, tastiness INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "Create TABLE users (id SERIAL, name VARCHAR NOT NULL, password_hash VARCHAR NOT NULL, admin INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "Create TABLE schools (id SERIAL, name VARCHAR NOT NULL)", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "Create TABLE teachers (user_id SERIAL, school_id SERIAL)", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "Create TABLE groups (id SERIAL, name VARCHAR NOT NULL, school_id INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "Create TABLE students (id SERIAL, name VARCHAR NOT NULL, group_id INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
   end
 
   defp seed_data() do
     IO.puts("Seeding data")
-    Postgrex.query!(DB, "INSERT INTO fruits(name, tastiness) VALUES($1, $2)", ["Apple", 5], pool: DBConnection.ConnectionPool)
-    Postgrex.query!(DB, "INSERT INTO fruits(name, tastiness) VALUES($1, $2)", ["Pear", 4], pool: DBConnection.ConnectionPool)
-    Postgrex.query!(DB, "INSERT INTO fruits(name, tastiness) VALUES($1, $2)", ["Banana", 7], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "INSERT INTO users(name, password_hash, admin) VALUES($1, $2, $3)", ["admin", Bcrypt.hash_pwd_salt("admin").password_hash, 1], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "INSERT INTO schools(name) VALUES($1)", ["NTI Johanneberg"], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "INSERT INTO teachers(user_id, school_id) VALUES($1, $2)", [1, 1], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "INSERT INTO groups(name, school_id) VALUES($1, $2)", ["Te4", 1], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "INSERT INTO students(name, group_id) VALUES($1, $2)", ["Te4", 1], pool: DBConnection.ConnectionPool)
   end
 
 end
