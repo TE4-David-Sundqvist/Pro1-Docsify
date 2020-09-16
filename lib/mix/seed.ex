@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Seed do
 
   defp create_tables() do
     IO.puts("Creating tables")
-    Postgrex.query!(DB, "Create TABLE users (id SERIAL, name VARCHAR NOT NULL, password_hash VARCHAR NOT NULL, admin INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "Create TABLE users (id SERIAL, username VARCHAR NOT NULL, password_hash VARCHAR NOT NULL, admin INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB, "Create TABLE schools (id SERIAL, name VARCHAR NOT NULL)", [], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB, "Create TABLE teachers (user_id SERIAL, school_id SERIAL)", [], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB, "Create TABLE groups (id SERIAL, name VARCHAR NOT NULL, school_id INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
@@ -31,7 +31,7 @@ defmodule Mix.Tasks.Seed do
 
   defp seed_data() do
     IO.puts("Seeding data")
-    Postgrex.query!(DB, "INSERT INTO users(name, password_hash, admin) VALUES($1, $2, $3)", ["admin", Bcrypt.hash_pwd_salt("admin").password_hash, 1], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "INSERT INTO users(username, password_hash, admin) VALUES($1, $2, $3)", ["admin", Bcrypt.hash_pwd_salt("admin"), 1], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB, "INSERT INTO schools(name) VALUES($1)", ["NTI Johanneberg"], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB, "INSERT INTO teachers(user_id, school_id) VALUES($1, $2)", [1, 1], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB, "INSERT INTO groups(name, school_id) VALUES($1, $2)", ["Te4", 1], pool: DBConnection.ConnectionPool)

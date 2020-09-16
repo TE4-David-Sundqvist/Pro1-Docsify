@@ -5,6 +5,7 @@ defmodule Pluggy.Router do
 
   alias Pluggy.FruitController
   alias Pluggy.UserController
+  alias Pluggy.Controller
 
 
 
@@ -26,9 +27,11 @@ defmodule Pluggy.Router do
   plug(:match)
   plug(:dispatch)
 
-  get("/login", do: LoginController.index(conn))
+  get("/", do: Controller.index(conn))
+  get("/home", do: Controller.home(conn))
 
-  post("/login", do: LoginController.login(conn, conn.body_params))
+  post("/login", do: UserController.login(conn, conn.body_params))
+  get("/logout", do: UserController.logout(conn))
 
   match _ do
     send_resp(conn, 404, "oops")
