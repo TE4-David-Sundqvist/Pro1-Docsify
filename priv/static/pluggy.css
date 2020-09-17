@@ -1,3 +1,30 @@
 body {
-	background-color: peachpuff;
+	background-color: floralwhite;
+}
+
+.center {
+	width: fit-content;
+	margin: 0 auto;
+	margin-top: 35vh;
+}
+
+#loginform {
+	background-color: cadetblue;
+	display: table-caption;
+	padding: 10px;
+	font-family: sans-serif;
+	border-radius: 5px;
+	margin: 0 auto;
+}
+
+#loginform input {
+	margin-bottom: 10px;
+	border: none;
+}
+
+#loginform button {
+	border: none;
+	background-color: lightskyblue;
+	width: 100%;
+	margin-top: 12px;
 }
