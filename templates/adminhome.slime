@@ -1,0 +1,6 @@
+
+div
+    h1 Admin
+    a href="/logout" logout
+    ul
+        li 

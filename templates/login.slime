@@ -1,7 +1,8 @@
-div
-  form action="/login" method="post"
-      label for="username" Username
-      input type="text" name="username" id="username"
-      label for="password" Password
-      input type="password" name="pwd" id="password"
-      button type="submit" Log In
+div class="center"
+  div id="loginform"
+    form action="/login" method="post"
+        label for="username" Username
+        input type="text" name="username" id="username"
+        label for="password" Password
+        input type="password" name="pwd" id="password"
+        button type="submit" Log In
