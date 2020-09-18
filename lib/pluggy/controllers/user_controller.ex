@@ -26,15 +26,23 @@ defmodule Pluggy.UserController do
 
   def logout(conn) do
     Plug.Conn.configure_session(conn, drop: true)
-    |> redirect("/fruits")
+    |> redirect("/")
+  end
+
+  def logged_in?(conn) do
+    if Plug.Conn.get_session(conn, :user_id) do
+      true
+    else
+      false
+    end
   end
 
   # def create(conn, params) do
-  # 	#pseudocode
-  # 	# in db table users with password_hash CHAR(60)
-  # 	# hashed_password = Bcrypt.hash_pwd_salt(params["password"])
-  #  	# Postgrex.query!(DB, "INSERT INTO users (username, password_hash) VALUES ($1, $2)", [params["username"], hashed_password], [pool: DBConnection.ConnectionPool])
-  #  	# redirect(conn, "/fruits")
+  # 	pseudocode
+  # 	in db table users with password_hash CHAR(60)
+  # 	hashed_password = Bcrypt.hash_pwd_salt(params["password"])
+  #  	Postgrex.query!(DB, "INSERT INTO users (username, password_hash) VALUES ($1, $2)", [params["username"], hashed_password], [pool: DBConnection.ConnectionPool])
+  #  	redirect(conn, "/fruits")
   # end
 
   defp redirect(conn, url),
