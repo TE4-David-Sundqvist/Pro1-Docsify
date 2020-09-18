@@ -4,7 +4,6 @@ defmodule Pluggy.Controller do
   import Pluggy.Template, only: [srender: 1]
 
   def index(conn) do
-    IO.inspect(Plug.Conn.get_session(conn, :user_id))
     if Plug.Conn.get_session(conn, :user_id) == nil do
       send_resp(conn, 200, srender("login"))
     else
@@ -13,7 +12,11 @@ defmodule Pluggy.Controller do
   end
 
   def home(conn) do
-    send_resp(conn, 200, srender("home"))
+    if Plug.Conn.get_session(conn, :user_id) != nil do
+      send_resp(conn, 200, srender("home"))
+    else
+      redirect(conn, "/")
+    end
   end
 
   defp redirect(conn, url),
