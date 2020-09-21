@@ -1,4 +1,9 @@
 
+body {
+	background-color: floralwhite;
+}
+
+
 .center {
 	width: fit-content;
 	margin: 0 auto;
