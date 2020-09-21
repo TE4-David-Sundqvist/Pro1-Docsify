@@ -1,7 +1,8 @@
 defmodule Pluggy.UserController do
 
   import Plug.Conn, only: [send_resp: 3]
-  import Pluggy.User
+  alias Pluggy.User
+  import Pluggy.Template, only: [srender: 1]
 
   def login(conn, params) do
     username = params["username"]
@@ -34,11 +35,15 @@ defmodule Pluggy.UserController do
     |> redirect("/")
   end
 
-  def logged_in?(conn) do
-    if Plug.Conn.get_session(conn, :user_id) do
-      true
+  def home(conn) do
+    if Pluggy.User.logged_in?(conn) do
+      if User.admin?(Plug.Conn.get_session(conn, :user_id)) do
+        redirect(conn, "/admin_home")
+      else
+        send_resp(conn, 200, srender("home"))
+      end
     else
-      false
+      redirect(conn, "/")
     end
   end
 

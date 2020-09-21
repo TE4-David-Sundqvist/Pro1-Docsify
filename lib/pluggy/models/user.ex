@@ -23,6 +23,14 @@ defmodule Pluggy.User do
     end
   end
 
+  def logged_in?(conn) do
+    if Plug.Conn.get_session(conn, :user_id) do
+      true
+    else
+      false
+    end
+  end
+
   def to_struct([[id, username]]) do
     %User{id: id, username: username}
   end

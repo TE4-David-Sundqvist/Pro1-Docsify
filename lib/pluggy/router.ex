@@ -2,10 +2,9 @@ defmodule Pluggy.Router do
   use Plug.Router
   use Plug.Debugger
 
-
-  alias Pluggy.FruitController
   alias Pluggy.UserController
   alias Pluggy.Controller
+  alias Pluggy.AdminController
 
 
 
@@ -28,7 +27,8 @@ defmodule Pluggy.Router do
   plug(:dispatch)
 
   get("/", do: Controller.index(conn))
-  get("/home", do: Controller.home(conn))
+  get("/home", do: UserController.home(conn))
+  get("/admin_home", do: AdminController.home(conn))
 
   post("/login", do: UserController.login(conn, conn.body_params))
   get("/logout", do: UserController.logout(conn))

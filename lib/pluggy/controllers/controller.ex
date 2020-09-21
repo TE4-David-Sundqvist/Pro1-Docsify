@@ -17,17 +17,6 @@ defmodule Pluggy.Controller do
     end
   end
 
-  def home(conn) do
-
-
-
-    if Plug.Conn.get_session(conn, :admin) == 1 do
-      send_resp(conn, 200, srender("adminhome"))
-    else
-      send_resp(conn, 200, srender("home"))
-    end
-  end
-
   defp redirect(conn, url),
     do: Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")
 end
