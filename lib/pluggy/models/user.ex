@@ -14,6 +14,10 @@ defmodule Pluggy.User do
     Postgrex.query!(DB, "SELECT id, password_hash FROM users WHERE username = $1", [username], pool: DBConnection.ConnectionPool)
   end
 
+  def get_admin(username) do
+    Postgrex.query!(DB, "SELECT admin FROM users WHERE username = $1", [username], pool: DBConnection,ConnectionPool)
+  end
+
   def to_struct([[id, username]]) do
     %User{id: id, username: username}
   end

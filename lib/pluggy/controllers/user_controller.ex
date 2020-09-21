@@ -8,6 +8,7 @@ defmodule Pluggy.UserController do
     password = params["pwd"]
 
     result = Pluggy.User.get_id(username)
+    result = Pluggy.User.get_admin(username)
 
     case result.num_rows do
       0 ->
