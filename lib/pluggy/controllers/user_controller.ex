@@ -8,7 +8,6 @@ defmodule Pluggy.UserController do
     password = params["pwd"]
 
     result = Pluggy.User.get_id(username)
-    result = Pluggy.User.get_admin(username)
 
     case result.num_rows do
       0 ->
@@ -17,8 +16,13 @@ defmodule Pluggy.UserController do
         [[id, password_hash]] = result.rows
 
         if Bcrypt.verify_pass(password, password_hash) do
-          Plug.Conn.put_session(conn, :user_id, id)
-          |> redirect("/home")
+          if Pluggy.User.admin?(id) do
+            Plug.Conn.put_session(conn, :user_id, id)
+            |> redirect("/admin_home")
+          else
+            Plug.Conn.put_session(conn, :user_id, id)
+            |> redirect("/home")
+          end
         else
           redirect(conn, "/")
         end
