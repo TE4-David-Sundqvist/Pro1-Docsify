@@ -5,6 +5,7 @@ defmodule Pluggy.Router do
   alias Pluggy.UserController
   alias Pluggy.Controller
   alias Pluggy.AdminController
+  alias Pluggy.SchoolController
 
 
 
@@ -28,10 +29,13 @@ defmodule Pluggy.Router do
 
   get("/", do: Controller.index(conn))
   get("/home", do: UserController.home(conn))
-  get("/admin_home", do: AdminController.home(conn))
+  get("/admin/home", do: AdminController.home(conn))
+  get("/logout", do: UserController.logout(conn))
 
   post("/login", do: UserController.login(conn, conn.body_params))
-  get("/logout", do: UserController.logout(conn))
+  post("/add/school", do: SchoolController.add(conn, conn.body_params))
+
+  get("/delete/school/:id", do: SchoolController.delete(conn, String.to_integer(id)))
 
   match _ do
     send_resp(conn, 404, "oops")

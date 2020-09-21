@@ -10,7 +10,7 @@ defmodule Pluggy.Controller do
       send_resp(conn, 200, srender("login"))
     else
       if Pluggy.User.admin?(id) do
-        redirect(conn, "admin_home")
+        redirect(conn, "admin/home")
       else
         redirect(conn, "home")
       end

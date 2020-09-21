@@ -63,6 +63,7 @@ body {
   .cards {
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
   }
   .card {
 	width: 12.5rem;

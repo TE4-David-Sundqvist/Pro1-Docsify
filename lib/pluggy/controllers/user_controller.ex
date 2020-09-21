@@ -19,7 +19,7 @@ defmodule Pluggy.UserController do
         if Bcrypt.verify_pass(password, password_hash) do
           if Pluggy.User.admin?(id) do
             Plug.Conn.put_session(conn, :user_id, id)
-            |> redirect("/admin_home")
+            |> redirect("/admin/home")
           else
             Plug.Conn.put_session(conn, :user_id, id)
             |> redirect("/home")
@@ -38,7 +38,7 @@ defmodule Pluggy.UserController do
   def home(conn) do
     if Pluggy.User.logged_in?(conn) do
       if User.admin?(Plug.Conn.get_session(conn, :user_id)) do
-        redirect(conn, "/admin_home")
+        redirect(conn, "/admin/home")
       else
         send_resp(conn, 200, srender("home"))
       end
