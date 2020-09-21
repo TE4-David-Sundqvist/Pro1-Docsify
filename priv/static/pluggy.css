@@ -1,8 +1,6 @@
-
 body {
 	background-color: floralwhite;
 }
-
 
 .center {
 	width: fit-content;
@@ -30,3 +28,87 @@ body {
 	width: 100%;
 	margin-top: 12px;
 }
+
+
+
+
+
+body {
+	margin: 0;
+	font-family: sans-serif;
+  }
+  
+  /*Header*/
+  header {
+	display: flex;
+	background-color: #2699FB;
+	color: white;
+	padding: 1em 2.3em;
+	align-items: center;
+  }
+  #title {
+	margin: 0;
+	flex-grow: 2;
+  }
+  #name {
+	height: 3em;
+	color: #2699FB;
+	border: none;
+	margin: 0 50px 0 12px;
+  }
+  
+  
+  
+  /*Cards*/
+  .cards {
+	display: flex;
+	justify-content: center;
+  }
+  .card {
+	width: 12.5rem;
+	height: 15rem;
+	border-radius: 15px;
+	background: white;
+	box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.25), inset 0px -135px 50px -100px rgba(0,0,0,0);
+	margin: 1.5rem;
+	position: relative;
+	overflow: hidden;
+	transition: 0.5s; 
+  }
+  .card .content {
+	color: white;
+	opacity: 0;
+	transform: translateY(30px);
+	transition: 0.5s;
+	position: absolute;
+	bottom: 0;
+	width: calc(100% - .75rem);
+	display: flex;
+	justify-content: space-between;
+	height: 3rem;
+	align-items: flex-end;
+	padding: .5rem;
+  }
+  .card:hover {
+	box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.25), inset 0px -135px 50px -100px rgba(0,0,0,0.6);
+  }
+  .card:hover .content {
+	opacity: 1;
+	transform: translateY(0px);
+  }
+  .card .content a {
+	color: white;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+  }
+  .card .content a img {
+	height: 1.75em;
+  }
+  .card .card-title {
+	width: inherit;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	height: 11.5rem;
+  }  

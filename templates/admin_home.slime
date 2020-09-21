@@ -1,6 +1,28 @@
-
-div
-    h1 Admin
-    a href="/logout" logout
-    ul
-        li 
+header
+    h1#title WHAT'S THEIR FACE
+    img src="../../images/person.svg" /
+    input#name type="text" value=("John Doe") /
+    a href="/logout"  LOG OUT
+main
+    h1 SCHOOLS
+    .cards
+        .card
+            p.card-title School 1
+            .content
+            a href="#" 
+                img src="Uploads/settings.svg" >/
+                | EDIT
+            a href="#" 
+                | REMOVE
+                img src=".Uploads/delete.svg" /
+        .card
+            p.card-title School 2
+            .content
+            a href="#" 
+                img src="Uploads/images/settings.svg" >/
+                | EDIT
+            a href="#" 
+                | REMOVE
+                img src="Uploads/images/delete.svg" /
+        .card
+            p.card-title NEW
