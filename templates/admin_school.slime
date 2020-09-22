@@ -13,7 +13,7 @@ main
             .card
                 p.card-title  = group.name
                 .content
-                    a href="#" 
+                    a href="/admin/school/#{school.id}/group/#{group.id}" 
                         img src="/uploads/settings.svg"
                         | EDIT
                     a href="/delete/school/#{school.id}/group/#{group.id}" 
@@ -34,7 +34,7 @@ main
         h1 TEACHERS
     .cards
         = for teacher <- teachers do
-            .card
+            .card.person
                 img src="/uploads/person.svg"
                 p.card-title  = teacher.name
                 .content
@@ -48,7 +48,8 @@ main
             p.card-title NEW
             .content
                 form action="/add/teacher/#{school.id}" method="post"
-                    input type="text" name="name" placeholder="Teachers name..." required="true"
+                    input type="text" name="name" placeholder="Name..." required="true"
+                    input type="file" accept="image/*"
                     label
                         button type="submit" style="display:none;"
                         a 

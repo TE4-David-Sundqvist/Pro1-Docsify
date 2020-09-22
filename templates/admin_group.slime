@@ -1,0 +1,31 @@
+header
+    h1#title WHAT'S THEIR FACE
+    img src="/uploads/person.svg"
+    p#name John Doe
+    a href="/logout"  LOG OUT
+main
+    center 
+        h1 = group.name
+    .cards
+        = for student <- students do
+            .card.person
+                img src="INSERT USER IMAGE HERE!!!!!!"
+                p.card-title  = student.name
+                .content
+                    a href="#" 
+                        img src="/uploads/settings.svg"
+                        | EDIT
+                    a href="/delete/student/#{student.id}" 
+                        | REMOVE
+                        img src="/uploads/delete.svg"
+        .card#add
+            p.card-title NEW
+            .content
+                form action="/add/student" method="post"
+                    input type="text" name="name" placeholder="Name..." required="true"
+                    input type="file" accept="image/*" required="true"
+                    label
+                        button type="submit" style="display:none;"
+                        a 
+                            | ADD
+                            img src="/uploads/add.svg"

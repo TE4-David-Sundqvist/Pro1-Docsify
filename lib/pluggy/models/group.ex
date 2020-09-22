@@ -2,6 +2,7 @@ defmodule Pluggy.Group do
   defstruct(id: nil, name: "")
 
   alias Pluggy.Group
+  alias Pluggy.Student
 
   def get(id) do
     Postgrex.query!(DB, "SELECT id, name FROM groups WHERE id = $1 LIMIT 1", [id],
@@ -20,6 +21,13 @@ defmodule Pluggy.Group do
   end
   defp get_all([]), do: []
   defp get_all([[head]|tail]), do: [Group.get(head)|get_all(tail)]
+
+  def get_students(group_id) do
+    Postgrex.query!(DB, "SELECT id FROM students WHERE group_id = $1", [group_id], pool: DBConnection.ConnectionPool).rows
+    |> _get_students()
+  end
+  defp _get_students([]), do: []
+  defp _get_students([[head]|tail]), do: [Student.get(head)|_get_students(tail)]
 
   def create(name, school_id) do
     Postgrex.query!(DB, "INSERT INTO groups(name, school_id) VALUES($1, $2)", [name, school_id], pool: DBConnection.ConnectionPool)

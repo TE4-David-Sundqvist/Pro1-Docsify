@@ -34,7 +34,7 @@ defmodule Pluggy.Router do
   get("/admin/home", do: AdminController.home(conn))
   get("/logout", do: UserController.logout(conn))
   get("/admin/school/:id", do: SchoolController.show(conn, String.to_integer(id)))
-  get("/admin/school/:id", do: SchoolController.show(conn, String.to_integer(id)))
+  get("/admin/school/:school_id/group/:group_id", do: GroupController.show(conn, String.to_integer(school_id), String.to_integer(group_id)))
 
   post("/login", do: UserController.login(conn, conn.body_params))
   post("/add/school", do: SchoolController.add(conn, conn.body_params))
