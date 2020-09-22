@@ -1,0 +1,56 @@
+header
+    h1#title WHAT'S THEIR FACE
+    img src="/uploads/person.svg"
+    p#name John Doe
+    a href="/logout"  LOG OUT
+main
+    center 
+        h1 = school.name
+    center 
+        h1 GROUPS
+    .cards
+        = for group <- groups do
+            .card
+                p.card-title  = group.name
+                .content
+                    a href="#" 
+                        img src="/uploads/settings.svg"
+                        | EDIT
+                    a href="/delete/school/#{school.id}/group/#{group.id}" 
+                        | REMOVE
+                        img src="/uploads/delete.svg"
+        .card#add
+            p.card-title NEW
+            .content
+                form action="/add/group/#{school.id}" method="post"
+                    input type="text" name="name" placeholder="Group name..." required="true"
+                    label
+                        button type="submit" style="display:none;"
+                        a 
+                            | ADD
+                            img src="/uploads/add.svg"
+    
+    center 
+        h1 TEACHERS
+    .cards
+        = for teacher <- teachers do
+            .card
+                img src="/uploads/person.svg"
+                p.card-title  = teacher.name
+                .content
+                    a href="#" 
+                        img src="/uploads/settings.svg"
+                        | EDIT
+                    a href="/delete/school/#{school.id}/teacher/#{teacher.id}" 
+                        | REMOVE
+                        img src="/uploads/delete.svg"
+        .card#add
+            p.card-title NEW
+            .content
+                form action="/add/teacher/#{school.id}" method="post"
+                    input type="text" name="name" placeholder="Teachers name..." required="true"
+                    label
+                        button type="submit" style="display:none;"
+                        a 
+                            | ADD
+                            img src="/uploads/add.svg"

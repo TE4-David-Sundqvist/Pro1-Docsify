@@ -4,4 +4,4 @@ html
         title Welcome to Pluggy
         link rel="stylesheet" type="text/css" href="/pluggy.css"
     body
-    = template
+        = template

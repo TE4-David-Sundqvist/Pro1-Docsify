@@ -1,24 +1,29 @@
 header
     h1#title WHAT'S THEIR FACE
-    img src="/uploads/person.svg" /
-    input#name type="text" value=("John Doe") /
+    img src="/uploads/person.svg"
+    p#name John Doe
     a href="/logout"  LOG OUT
 main
-    h1 SCHOOLS
+    center 
+        h1 SCHOOLS
     .cards
         = for school <- schools do
             .card
                 p.card-title  = school.name
                 .content
-                    a href="/admin/home/school/#{school.id}" 
-                        img src="/uploads/settings.svg" >/
+                    a href="/admin/school/#{school.id}" 
+                        img src="/uploads/settings.svg"
                         | EDIT
                     a href="/delete/school/#{school.id}" 
                         | REMOVE
-                        img src="/uploads/delete.svg" /
-        .card
+                        img src="/uploads/delete.svg"
+        .card#add
             p.card-title NEW
             .content
                 form action="/add/school" method="post"
-                    input type="text" name="name" placeholder="School name..."
-                    button type="submit" Add
+                    input type="text" name="name" placeholder="School name..." required="true"
+                    label
+                        button type="submit" style="display:none;"
+                        a 
+                            | ADD
+                            img src="/uploads/add.svg"

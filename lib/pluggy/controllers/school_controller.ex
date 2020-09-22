@@ -15,6 +15,10 @@ defmodule Pluggy.SchoolController do
     redirect(conn, "/admin/home")
   end
 
+  def show(conn, id) do
+    send_resp(conn, 200, srender("admin_school", [groups: School.get_groups(id), teachers: School.get_teachers(id), school: School.get(id)]))
+  end
+
   defp redirect(conn, url),
     do: Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")
 end
